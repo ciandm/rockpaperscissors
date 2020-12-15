@@ -1,13 +1,14 @@
 import React from 'react'
 import {
   GameWrapper,
-  Button
+  Button,
+  ButtonWhite,
+  ButtonImage
 } from './Game.styled';
 
-function Game({ children }) {
+function Game({ children, variation }) {
   return (
-    <GameWrapper
-      variation="normal">
+    <GameWrapper variation={variation}>
       {children}
     </GameWrapper>
   )
@@ -15,8 +16,14 @@ function Game({ children }) {
 
 export default Game
 
-Game.Button = function GameButton({ icon }) {
+Game.Button = function GameButton({ icon, variation }) {
   return (
-    <Button icon={icon}></Button>
+    <Button
+      icon={icon}
+      variation={variation}
+    >
+      <ButtonWhite />
+      <ButtonImage icon={icon} />
+    </Button>
   )
 }

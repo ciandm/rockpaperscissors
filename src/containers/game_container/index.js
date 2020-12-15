@@ -3,8 +3,12 @@ import Game from '../../components/game/Game';
 
 function GameContainer() {
   return (
-    <Game>
-
+    <Game
+      variation="normal"
+    >
+      <Game.Button icon="paper" variation="normal" />
+      <Game.Button icon="scissors" variation="normal" />
+      <Game.Button icon="rock" variation="normal" />
     </Game>
   )
 }

@@ -5,6 +5,7 @@ export const Container = styled.header`
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
+  min-width: 480px;
   padding: 24px 30px;
 `
 
