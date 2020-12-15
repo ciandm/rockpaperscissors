@@ -4,15 +4,12 @@ import scissorsImage from '../assets/icon-scissors.svg';
 
 export const buttonInfo = {
   rock: {
-    color: 'rockGradient',
     url: rockImage,
   },
   paper: {
-    color: 'paperGradient',
     url: paperImage
   },
   scissors: {
-    color: 'scissorsGradient',
     url: scissorsImage
   }
 }

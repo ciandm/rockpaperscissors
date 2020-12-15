@@ -4,30 +4,47 @@ import backgroundImageBonus from '../../assets/bg-pentagon.svg';
 import buttonInfo from '../../constants/buttonInfo';
 
 export const GameWrapper = styled.main`
+  margin: 60px auto 0 auto;
+  width: 100%;
+`
+
+export const Selection = styled.div`
+  display: flex;
   background-image: ${({ variation }) => variation === 'normal'
     ? `url(${backgroundImage})`
     : `url(${backgroundImageBonus})`};
   background-repeat: no-repeat;
   background-position: center center;
-  margin: 60px auto 0 auto;
+  height: 100%;
+  justify-content: center;
   min-height: 500px;
+  max-width: 480px;
+  margin: 0 auto;
   position: relative;
-  width: 480px;
+  width: 100%;
 `
 
 export const Button = styled.button`
   align-items: center;
-  background: ${({ icon, theme }) => `${theme.gradients[buttonInfo[icon].color]}`};
+  background: ${({ icon, theme }) => `${theme.gradients[icon]}`};
   border: none;
   border-radius: 200px;
   box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  cursor: ${({ largerButton }) => largerButton ? 'not-allowed' : 'pointer'};
   display: flex;
-  height: 200px;
+  height: ${({ largerButton }) => largerButton ? "300px" : "200px"};
   justify-content: center;
   outline: none;
   position: absolute;
-  width: 200px;
+  transition: transform 0.2s ease-in-out;
+  width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
+  
+  ${({ largerButton }) => !largerButton && css`
+    &:hover {
+    box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2),
+                ${({ theme, icon }) => theme.shadows[`${icon}`]}
+    }
+  `}
 
   ${({ icon, variation }) => {
 
@@ -48,8 +65,6 @@ export const Button = styled.button`
       if (icon === "rock") {
         return css`
           bottom: 16px;
-          left: 50%;
-          transform: translateX(-50%)
         `
       }
 
@@ -79,4 +94,32 @@ export const ButtonImage = styled.div`
   height: 80px;
   width: 80px;
   z-index: 50;
+`
+
+export const Selected = styled.div`
+  display: flex;
+  width: 100%;
+`
+
+export const Column = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  width: 50%;
+`
+
+export const ColumnHeader = styled.h3`
+  color: #FFF;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+`
+
+export const ColumnChoice = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `
