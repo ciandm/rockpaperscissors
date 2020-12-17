@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import backgroundImage from '../../assets/bg-triangle.svg'
 import backgroundImageBonus from '../../assets/bg-pentagon.svg';
 import buttonInfo from '../../constants/buttonInfo';
@@ -39,11 +39,23 @@ export const Button = styled.button`
   transition: transform 0.2s ease-in-out;
   width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
   
+  /* If the button is the smaller variation */
   ${({ largerButton }) => !largerButton && css`
     &:hover {
     box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2),
                 ${({ theme, icon }) => theme.shadows[`${icon}`]}
     }
+  `
+  }
+
+  /* Larger variation */
+  ${({ largerButton }) => largerButton && css`
+    box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.2);
+  `}
+
+  ${({ largerButton, shouldFadeIn }) => largerButton && shouldFadeIn && css`
+    animation: ${fadeIn} 0.5s ease-in 0.5s;
+    animation-fill-mode: backwards;
   `}
 
   ${({ icon, variation }) => {
@@ -83,6 +95,12 @@ export const ButtonWhite = styled.div`
   overflow: hidden;
   position: absolute;
   width: 156px;
+
+  ${({ largerButton }) => largerButton && css`
+    box-shadow: inset 0 12px 0px rgba(0, 0, 0, 0.1);
+    height: 240px;
+    width: 240px;
+  `}
 `
 
 export const ButtonImage = styled.div`
@@ -94,6 +112,11 @@ export const ButtonImage = styled.div`
   height: 80px;
   width: 80px;
   z-index: 50;
+
+  ${({ largerButton }) => largerButton && css`
+    height: 120px;
+    width: 120px;
+  `}
 `
 
 export const Selected = styled.div`
@@ -119,7 +142,30 @@ export const ColumnHeader = styled.h3`
 `
 
 export const ColumnChoice = styled.div`
+  align-items: center;
   display: flex;
+  height: 300px;
   justify-content: center;
-  width: 100%;
+  width: 300px;
+
+  &::before {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 240px;
+    content: '';
+    display: block;
+    height: 240px;
+    width: 240px;
+  }
+`
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.5)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 `

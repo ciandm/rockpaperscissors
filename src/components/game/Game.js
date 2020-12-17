@@ -79,8 +79,8 @@ Game.ColumnChoice = function GameColumnChoice({ choice, ...restProps }) {
         icon={choice}
         {...restProps}
       >
-        <ButtonWhite />
-        <ButtonImage icon={choice} />
+        <ButtonWhite {...restProps} />
+        <ButtonImage icon={choice} {...restProps} />
       </Button>
     </ColumnChoice>
   )
