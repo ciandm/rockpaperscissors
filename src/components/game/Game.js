@@ -8,7 +8,11 @@ import {
   Selected,
   Column,
   ColumnHeader,
-  ColumnChoice
+  ColumnChoice,
+  WinnerHighlight,
+  ColumnLarge,
+  ColumnHeading,
+  ButtonReset
 } from './Game.styled';
 
 function Game({ children }) {
@@ -56,9 +60,9 @@ Game.Selected = function GameSelected({ children }) {
   )
 }
 
-Game.Column = function GameColumn({ children }) {
+Game.Column = function GameColumn({ children, ...restProps }) {
   return (
-    <Column>
+    <Column {...restProps}>
       {children}
     </Column>
   )
@@ -72,9 +76,9 @@ Game.ColumnHeader = function GameColumnHeader({ text }) {
   )
 }
 
-Game.ColumnChoice = function GameColumnChoice({ choice, ...restProps }) {
+Game.ColumnChoice = function GameColumnChoice({ choice, winner, ...restProps }) {
   return (
-    <ColumnChoice>
+    <ColumnChoice {...restProps}>
       <Button
         icon={choice}
         {...restProps}
@@ -82,6 +86,33 @@ Game.ColumnChoice = function GameColumnChoice({ choice, ...restProps }) {
         <ButtonWhite {...restProps} />
         <ButtonImage icon={choice} {...restProps} />
       </Button>
+      { winner === true && <WinnerHighlight />}
     </ColumnChoice>
+  )
+}
+
+Game.ColumnLarge = function GameColumnLarge({ children }) {
+  return (
+    <ColumnLarge>
+      {children}
+    </ColumnLarge>
+  )
+}
+
+Game.ColumnHeading = function GameColumnHeading({ children, ...restProps }) {
+  return (
+    <ColumnHeading>
+      {children}
+    </ColumnHeading>
+  )
+}
+
+Game.ButtonReset = function GameButtonReset({ children, playAgainHandler }) {
+  return (
+    <ButtonReset
+      onClick={() => playAgainHandler()}
+    >
+      {children}
+    </ButtonReset>
   )
 }

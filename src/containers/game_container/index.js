@@ -6,9 +6,20 @@ function GameContainer({
   houseChoice,
   handleUserChoiceSelection,
   variation,
-  choices
+  choices,
+  winner,
+  playAgainHandler
 }) {
 
+  function displayWinningMessage(winner) {
+    if (winner === 'user') {
+      return "You won";
+    } else if (winner === 'house') {
+      return "You lost";
+    } else if (winner === 'draw') {
+      return "Draw";
+    }
+  }
   return (
     <Game>
       {/* Where user selects their choice */}
@@ -29,16 +40,31 @@ function GameContainer({
       {
         userChoice &&
         <Game.Selected>
-          <Game.Column>
+          <Game.Column
+            side="left"
+          >
             <Game.ColumnHeader
               text="You picked"
             />
             <Game.ColumnChoice
               choice={userChoice}
               largerButton="true"
+              winner={winner === 'user' ? true : false}
             />
           </Game.Column>
-          <Game.Column>
+          <Game.ColumnLarge>
+            <Game.ColumnHeading>
+              {displayWinningMessage(winner)}
+            </Game.ColumnHeading>
+            <Game.ButtonReset
+              playAgainHandler={playAgainHandler}
+            >
+              Play again
+            </Game.ButtonReset>
+          </Game.ColumnLarge>
+          <Game.Column
+            side="right"
+          >
             <Game.ColumnHeader
               text="The house picked"
             />
@@ -46,10 +72,12 @@ function GameContainer({
               choice={houseChoice}
               largerButton="true"
               shouldFadeIn="true"
+              winner={winner === 'house' ? true : false}
             />
           </Game.Column>
         </Game.Selected>
       }
+      {}
     </Game>
   )
 }

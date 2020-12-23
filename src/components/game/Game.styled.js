@@ -3,6 +3,40 @@ import backgroundImage from '../../assets/bg-triangle.svg'
 import backgroundImageBonus from '../../assets/bg-pentagon.svg';
 import buttonInfo from '../../constants/buttonInfo';
 
+// Animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.5)
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`
+
+const slideLeft = keyframes`
+  from {
+    transform: translateX(40%)
+  }
+
+  to {
+    transform: translateX(0);
+  }
+`
+
+const slideRight = keyframes`
+  from {
+    transform: translateX(-40%)
+  }
+
+  to {
+    transform: translateX(0);
+  }
+`
+
+// CSS
 export const GameWrapper = styled.main`
   margin: 60px auto 0 auto;
   width: 100%;
@@ -38,6 +72,7 @@ export const Button = styled.button`
   position: absolute;
   transition: transform 0.2s ease-in-out;
   width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
+  z-index: 500;
   
   /* If the button is the smaller variation */
   ${({ largerButton }) => !largerButton && css`
@@ -121,15 +156,33 @@ export const ButtonImage = styled.div`
 
 export const Selected = styled.div`
   display: flex;
+  max-width: 940px;
+  margin: 0 auto;
   width: 100%;
 `
 
 export const Column = styled.div`
+  ${({ side }) => {
+    if (side === 'left') {
+      return css`
+          animation: ${slideLeft};
+        `
+    }
+
+    if (side === 'right') {
+      return css`
+          animation: ${slideRight};
+        `
+    }
+  }}
+  animation-fill-mode: backwards;
+  animation-duration: 1s;
+  animation-delay: 1.5s;
+  animation-timing-function: cubic-bezier(.24,.42,.48,1);
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
-  width: 50%;
+  will-change: transform;
 `
 
 export const ColumnHeader = styled.h3`
@@ -146,6 +199,7 @@ export const ColumnChoice = styled.div`
   display: flex;
   height: 300px;
   justify-content: center;
+  position: relative;
   width: 300px;
 
   &::before {
@@ -154,18 +208,81 @@ export const ColumnChoice = styled.div`
     content: '';
     display: block;
     height: 240px;
+    position: absolute;
     width: 240px;
   }
 `
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.5)
+export const WinnerHighlight = styled.div`
+  animation: ${fadeIn};
+  animation-fill-mode: backwards;
+  animation-duration: 0.5s;
+  animation-delay: 2s;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 420px;
+  display: flex;
+  height: 420px;
+  justify-content: center;
+  position: absolute;
+  width: 420px;
+  will-change: opacity, transform; 
+
+  &::before,
+  &::after {
+    border-radius: 100%;
+    content: '';
+    display: block;
+    position: absolute;
   }
 
-  to {
-    opacity: 1;
-    transform: scale(1);
+  &::before {
+      background-color: rgba(255, 255, 255, 0.02);
+    height: 560px;
+    width: 560px;
+    z-index: -6;
   }
+
+  &::after {
+    background-color: rgba(255, 255, 255, 0.02);
+    height: 700px;
+    width: 700px;
+    z-index: -10;
+  }
+`
+
+export const ColumnLarge = styled.div`
+  animation: ${fadeIn};
+  animation-fill-mode: backwards;
+  animation-duration: 1s;
+  animation-delay: 1.75s;
+  animation-timing-function: cubic-bezier(.24,.42,.48,1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 48px;
+  text-align: center;
+  will-change: opacity, transform; 
+  z-index: 600;
+`
+
+export const ColumnHeading = styled.h2`
+  color: #FFF;
+  font-size: 56px;
+  text-transform: uppercase;
+`
+
+export const ButtonReset = styled.button`
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  color: ${({ theme }) => theme.text.dangerText};
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-top: 20px;
+  outline: none;
+  padding: 20px 60px;
+  text-transform: uppercase;
+  width: 100%;
 `

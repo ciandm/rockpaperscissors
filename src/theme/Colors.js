@@ -15,7 +15,8 @@ export const colors = {
   text: {
     darkText: 'hsl(229, 25%, 31%)',
     scoreText: 'hsl(229, 64%, 46%)',
-    headerOutline: 'hsl(217, 16%, 45%)'
+    headerOutline: 'hsl(217, 16%, 45%)',
+    dangerText: 'hsl(349,49%,49%)'
   }
 }
 

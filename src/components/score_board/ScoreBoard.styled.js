@@ -5,8 +5,12 @@ export const Container = styled.header`
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
+  margin: 0 auto;
+  max-width: 700px;
   min-width: 480px;
   padding: 24px 30px;
+  position: relative;
+  z-index: 1000;
 `
 
 export const Image = styled.img`
@@ -23,6 +27,7 @@ export const Card = styled.div`
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  min-width: 150px;
   padding: 20px 30px;
 `
 
