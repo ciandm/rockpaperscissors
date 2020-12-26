@@ -31,9 +31,9 @@ function Game({ children }) {
 
 export default Game;
 
-Game.Selection = function GameSelection({ children, mode }) {
+Game.Selection = function GameSelection({ children, gameMode }) {
   return (
-    <Selection mode={mode}>
+    <Selection gameMode={gameMode}>
       {children}
     </Selection>
   )
@@ -41,14 +41,14 @@ Game.Selection = function GameSelection({ children, mode }) {
 
 Game.Button = function GameButton({
   icon,
-  mode,
+  gameMode,
   handleButtonClick,
   ...restProps
 }) {
   return (
     <Button
       icon={icon}
-      mode={mode}
+      gameMode={gameMode}
       onClick={() => handleButtonClick(icon)}
       {...restProps}
     >

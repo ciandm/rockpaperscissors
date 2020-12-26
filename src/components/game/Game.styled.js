@@ -46,7 +46,7 @@ export const GameWrapper = styled.main`
 
 export const Selection = styled.div`
   display: flex;
-  background-image: ${({ mode }) => mode === 'normal'
+  background-image: ${({ gameMode }) => gameMode === 'normal'
     ? `url(${backgroundImage})`
     : `url(${backgroundImageBonus})`};
   background-repeat: no-repeat;
@@ -76,7 +76,7 @@ export const Button = styled.button`
   width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
   z-index: 500;
   
-  /* If the button is the smaller mode */
+  /* If the button is the smaller gameMode */
   ${({ largerButton }) => !largerButton && css`
     &:hover {
     box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2),
@@ -85,7 +85,7 @@ export const Button = styled.button`
   `
   }
 
-  /* Larger mode */
+  /* Larger gameMode */
   ${({ largerButton }) => largerButton && css`
     box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.2);
   `}
@@ -95,9 +95,9 @@ export const Button = styled.button`
     animation-fill-mode: backwards;
   `}
 
-  ${({ icon, mode }) => {
+  ${({ icon, gameMode }) => {
 
-    if (mode === "normal") {
+    if (gameMode === "normal") {
       if (icon === 'paper') {
         return css`
           left: 16px;
@@ -346,7 +346,7 @@ export const ModalHeader = styled.header`
 `
 
 export const ModalImage = styled.div`
-  background-image: ${({ mode }) => mode === 'normal' ?
+  background-image: ${({ gameMode }) => gameMode === 'normal' ?
     `url(${modalBackground})` :
     `url(${modalBackgroundBonus})`
   };

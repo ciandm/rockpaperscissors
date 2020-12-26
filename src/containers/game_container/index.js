@@ -5,7 +5,7 @@ function GameContainer({
   userChoice,
   houseChoice,
   handleUserChoiceSelection,
-  mode,
+  gameMode,
   choices,
   winner,
   playAgainHandler,
@@ -29,12 +29,12 @@ function GameContainer({
       {/* Where user selects their choice */}
       {
         !userChoice &&
-        <Game.Selection mode={mode}>
+        <Game.Selection gameMode={gameMode}>
           {choices.map(choice => (
             <Game.Button
               key={choice}
               icon={choice}
-              mode={mode}
+              gameMode={gameMode}
               handleButtonClick={() => handleUserChoiceSelection(choice)}
             />
           ))}
@@ -87,7 +87,7 @@ function GameContainer({
             <h2>Rules</h2>
             <button onClick={() => handleModalClose()}>&nbsp;</button>
           </Game.ModalHeader>
-          <Game.ModalImage mode={mode} />
+          <Game.ModalImage gameMode={gameMode} />
           <Game.ModalButton handleModeChange={handleModeChange}>Change mode</Game.ModalButton>
         </Game.ModalContents>
       </Game.Modal>

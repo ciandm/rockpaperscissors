@@ -5,12 +5,12 @@ import bonusLogo from '../../assets/logo-bonus.svg';
 
 function Header({
   score,
-  mode
+  gameMode
 }) {
   return (
     <ScoreBoard>
       <ScoreBoard.Image
-        src={mode === 'normal' ? logo : bonusLogo}
+        src={gameMode === 'normal' ? logo : bonusLogo}
         alt="Rock Paper Scissors logo"
       />
       <ScoreBoard.Card

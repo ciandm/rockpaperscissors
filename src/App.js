@@ -14,14 +14,14 @@ function App() {
   const [userChoice, setUserChoice] = useState('');
   const [houseChoice, setHouseChoice] = useState('');
   const [winner, setWinner] = useState('');
-  const [mode, setMode] = useState('normal');
+  const [gameMode, setGameMode] = useState('normal');
   const [score, setScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 
 
   function handleUserChoiceSelection(choice) {
     setUserChoice(choice);
-    setHouseChoice(houseSelection(choices[mode]));
+    setHouseChoice(houseSelection(choices[gameMode]));
   }
 
   useEffect(() => {
@@ -59,10 +59,10 @@ function App() {
   }
 
   function handleModeChange() {
-    if (mode === 'normal') {
-      setMode('bonus');
-    } else if (mode === 'bonus') {
-      setMode('normal');
+    if (gameMode === 'normal') {
+      setGameMode('bonus');
+    } else if (gameMode === 'bonus') {
+      setGameMode('normal');
     }
     setScore(0);
     playAgainHandler();
@@ -74,14 +74,14 @@ function App() {
         <GlobalStyles />
         <Header
           score={score}
-          mode={mode}
+          gameMode={gameMode}
         />
         <GameContainer
-          choices={choices[mode]}
+          choices={choices[gameMode]}
           userChoice={userChoice}
           houseChoice={houseChoice}
           handleUserChoiceSelection={handleUserChoiceSelection}
-          mode={mode}
+          gameMode={gameMode}
           winner={winner}
           playAgainHandler={playAgainHandler}
           modalOpen={modalOpen}
