@@ -17,6 +17,9 @@ export const colors = {
     scoreText: 'hsl(229, 64%, 46%)',
     headerOutline: 'hsl(217, 16%, 45%)',
     dangerText: 'hsl(349,49%,49%)'
+  },
+  opaque: {
+    background: 'hsla(237, 49%, 15%, 70%)'
   }
 }
 

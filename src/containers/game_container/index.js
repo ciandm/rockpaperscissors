@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Game from '../../components/game/Game';
 
 function GameContainer({
   userChoice,
   houseChoice,
   handleUserChoiceSelection,
-  variation,
+  mode,
   choices,
   winner,
-  playAgainHandler
+  playAgainHandler,
+  modalOpen,
+  handleModalOpen,
+  handleModalClose,
+  handleModeChange
 }) {
 
   function displayWinningMessage(winner) {
@@ -25,12 +29,12 @@ function GameContainer({
       {/* Where user selects their choice */}
       {
         !userChoice &&
-        <Game.Selection variation={variation}>
+        <Game.Selection mode={mode}>
           {choices.map(choice => (
             <Game.Button
               key={choice}
               icon={choice}
-              variation={variation}
+              mode={mode}
               handleButtonClick={() => handleUserChoiceSelection(choice)}
             />
           ))}
@@ -77,7 +81,19 @@ function GameContainer({
           </Game.Column>
         </Game.Selected>
       }
-      {}
+      <Game.Modal isOpen={modalOpen}>
+        <Game.ModalContents>
+          <Game.ModalHeader>
+            <h2>Rules</h2>
+            <button onClick={() => handleModalClose()}>&nbsp;</button>
+          </Game.ModalHeader>
+          <Game.ModalImage mode={mode} />
+          <Game.ModalButton handleModeChange={handleModeChange}>Change mode</Game.ModalButton>
+        </Game.ModalContents>
+      </Game.Modal>
+      <Game.ModalOpen handleModalOpen={handleModalOpen}>
+        Rules
+      </Game.ModalOpen>
     </Game>
   )
 }

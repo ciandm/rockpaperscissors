@@ -1,7 +1,10 @@
 import styled, { css, keyframes } from 'styled-components';
 import backgroundImage from '../../assets/bg-triangle.svg'
 import backgroundImageBonus from '../../assets/bg-pentagon.svg';
+import modalBackground from '../../assets/image-rules.svg';
+import modalBackgroundBonus from '../../assets/image-rules-bonus.svg';
 import buttonInfo from '../../constants/buttonInfo';
+import iconClose from '../../assets/icon-close.svg';
 
 // Animations
 const fadeIn = keyframes`
@@ -35,7 +38,6 @@ const slideRight = keyframes`
     transform: translateX(0);
   }
 `
-
 // CSS
 export const GameWrapper = styled.main`
   margin: 60px auto 0 auto;
@@ -44,7 +46,7 @@ export const GameWrapper = styled.main`
 
 export const Selection = styled.div`
   display: flex;
-  background-image: ${({ variation }) => variation === 'normal'
+  background-image: ${({ mode }) => mode === 'normal'
     ? `url(${backgroundImage})`
     : `url(${backgroundImageBonus})`};
   background-repeat: no-repeat;
@@ -74,7 +76,7 @@ export const Button = styled.button`
   width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
   z-index: 500;
   
-  /* If the button is the smaller variation */
+  /* If the button is the smaller mode */
   ${({ largerButton }) => !largerButton && css`
     &:hover {
     box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2),
@@ -83,7 +85,7 @@ export const Button = styled.button`
   `
   }
 
-  /* Larger variation */
+  /* Larger mode */
   ${({ largerButton }) => largerButton && css`
     box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.2);
   `}
@@ -93,9 +95,9 @@ export const Button = styled.button`
     animation-fill-mode: backwards;
   `}
 
-  ${({ icon, variation }) => {
+  ${({ icon, mode }) => {
 
-    if (variation === "normal") {
+    if (mode === "normal") {
       if (icon === 'paper') {
         return css`
           left: 16px;
@@ -285,4 +287,103 @@ export const ButtonReset = styled.button`
   padding: 20px 60px;
   text-transform: uppercase;
   width: 100%;
+`
+
+export const Modal = styled.div`
+  align-items: center;
+  background-color: ${({ theme }) => theme.opaque.background};
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5000;
+
+  ${({ isOpen }) => isOpen === false && css`
+    display: none;
+    visibility: hidden;
+  `}
+`
+
+export const ModalContents = styled.div`
+  animation: ${fadeIn};
+  animation-duration: .3s;
+  animation-fill-mode: backwards;
+  background-color: #FFF;
+  border-radius: 12px;
+  padding: 36px;
+  position: absolute;
+  width: 400px;
+  will-change: opacity, transform;
+`
+
+export const ModalHeader = styled.header`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+
+  & h2 {
+    color: ${({ theme }) => theme.text.darkText};
+    font-size: 32px;
+    text-transform: uppercase;
+  }
+
+  & button {
+    background-color: transparent;
+    background-image: url(${iconClose});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    height: 24px;
+    outline: none;
+    width: 24px;
+  }
+`
+
+export const ModalImage = styled.div`
+  background-image: ${({ mode }) => mode === 'normal' ?
+    `url(${modalBackground})` :
+    `url(${modalBackgroundBonus})`
+  };
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 100%;
+  width: 100%;
+`
+
+const buttonCommonStyles = css`
+  border: none;
+  border-radius: 8px;
+  color: #FFF;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+  padding: 12px 36px;
+`
+export const ModalButton = styled.button`
+  ${buttonCommonStyles};
+  background-image: ${({ theme }) => theme.gradients.background};
+  display: block;
+  margin: 48px auto 0;
+`
+
+export const ModalOpen = styled.button`
+  ${buttonCommonStyles};
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.text.headerOutline};
+  bottom: 0;
+  margin: 24px;
+  position: absolute;
+  right: 0;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
 `

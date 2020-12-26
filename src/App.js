@@ -14,13 +14,14 @@ function App() {
   const [userChoice, setUserChoice] = useState('');
   const [houseChoice, setHouseChoice] = useState('');
   const [winner, setWinner] = useState('');
-  const [variation, setVariation] = useState('normal');
+  const [mode, setMode] = useState('normal');
   const [score, setScore] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
 
   function handleUserChoiceSelection(choice) {
     setUserChoice(choice);
-    setHouseChoice(houseSelection(choices[variation]));
+    setHouseChoice(houseSelection(choices[mode]));
   }
 
   useEffect(() => {
@@ -49,21 +50,44 @@ function App() {
     setWinner('');
   }
 
+  function handleModalOpen() {
+    setModalOpen(true);
+  }
+
+  function handleModalClose() {
+    setModalOpen(false)
+  }
+
+  function handleModeChange() {
+    if (mode === 'normal') {
+      setMode('bonus');
+    } else if (mode === 'bonus') {
+      setMode('normal');
+    }
+    setScore(0);
+    playAgainHandler();
+  }
+
   return (
     <div className="app">
       <ThemeProvider theme={colors}>
         <GlobalStyles />
         <Header
           score={score}
+          mode={mode}
         />
         <GameContainer
-          choices={choices[variation]}
+          choices={choices[mode]}
           userChoice={userChoice}
           houseChoice={houseChoice}
           handleUserChoiceSelection={handleUserChoiceSelection}
-          variation={variation}
+          mode={mode}
           winner={winner}
           playAgainHandler={playAgainHandler}
+          modalOpen={modalOpen}
+          handleModalOpen={handleModalOpen}
+          handleModalClose={handleModalClose}
+          handleModeChange={handleModeChange}
         />
       </ThemeProvider>
     </div>

@@ -12,7 +12,13 @@ import {
   WinnerHighlight,
   ColumnLarge,
   ColumnHeading,
-  ButtonReset
+  ButtonReset,
+  Modal,
+  ModalContents,
+  ModalHeader,
+  ModalImage,
+  ModalButton,
+  ModalOpen
 } from './Game.styled';
 
 function Game({ children }) {
@@ -25,9 +31,9 @@ function Game({ children }) {
 
 export default Game;
 
-Game.Selection = function GameSelection({ children, variation }) {
+Game.Selection = function GameSelection({ children, mode }) {
   return (
-    <Selection variation={variation}>
+    <Selection mode={mode}>
       {children}
     </Selection>
   )
@@ -35,14 +41,14 @@ Game.Selection = function GameSelection({ children, variation }) {
 
 Game.Button = function GameButton({
   icon,
-  variation,
+  mode,
   handleButtonClick,
   ...restProps
 }) {
   return (
     <Button
       icon={icon}
-      variation={variation}
+      mode={mode}
       onClick={() => handleButtonClick(icon)}
       {...restProps}
     >
@@ -114,5 +120,49 @@ Game.ButtonReset = function GameButtonReset({ children, playAgainHandler }) {
     >
       {children}
     </ButtonReset>
+  )
+}
+
+Game.Modal = function GameModal({ children, isOpen }) {
+  return (
+    <Modal isOpen={isOpen}>
+      {children}
+    </Modal>
+  )
+}
+
+Game.ModalContents = function GameModalContents({ children }) {
+  return (
+    <ModalContents>
+      {children}
+    </ModalContents>
+  )
+}
+
+Game.ModalHeader = function GameModalHeader({ children }) {
+  return (
+    <ModalHeader>{children}</ModalHeader>
+  )
+}
+
+Game.ModalImage = function GameModalImage({ children, ...restProps }) {
+  return (
+    <ModalImage {...restProps}>
+      {children}
+    </ModalImage>
+  )
+}
+
+Game.ModalButton = function GameModalButton({ children, handleModeChange }) {
+  return (
+    <ModalButton onClick={() => handleModeChange()}>{children}</ModalButton>
+  )
+}
+
+Game.ModalOpen = function GameModalOpen({ children, handleModalOpen }) {
+  return (
+    <ModalOpen onClick={() => handleModalOpen()}>
+      {children}
+    </ModalOpen>
   )
 }
