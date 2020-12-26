@@ -14,7 +14,8 @@ export const GlobalStyles = createGlobalStyle`
     background: ${colors.gradients.background};
     background-repeat: no-repeat;
     font-family: 'Barlow Semi Condensed', sans-serif;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
   }
 `
 
