@@ -14,7 +14,7 @@ function App() {
   const [userChoice, setUserChoice] = useState('');
   const [houseChoice, setHouseChoice] = useState('');
   const [winner, setWinner] = useState('');
-  const [gameMode, setGameMode] = useState('normal');
+  const [gameMode, setGameMode] = useState('bonus');
   const [score, setScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
 

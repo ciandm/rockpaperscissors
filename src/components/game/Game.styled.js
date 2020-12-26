@@ -68,15 +68,15 @@ export const Button = styled.button`
   box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2);
   cursor: ${({ largerButton }) => largerButton ? 'not-allowed' : 'pointer'};
   display: flex;
-  height: ${({ largerButton }) => largerButton ? "300px" : "200px"};
+  height: ${({ largerButton, heightSize }) => largerButton ? "300px" : heightSize};
   justify-content: center;
   outline: none;
   position: absolute;
-  transition: transform 0.2s ease-in-out;
-  width: ${({ largerButton }) => largerButton ? "300px" : "200px"};
+  /* transition: transform 0.2s ease-in-out; */
+  width: ${({ largerButton, widthSize }) => largerButton ? "300px" : widthSize};
   z-index: 500;
   
-  /* If the button is the smaller gameMode */
+  /* If the button is the smaller variation */
   ${({ largerButton }) => !largerButton && css`
     &:hover {
     box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.2),
@@ -85,7 +85,7 @@ export const Button = styled.button`
   `
   }
 
-  /* Larger gameMode */
+  /* Larger variation */
   ${({ largerButton }) => largerButton && css`
     box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.2);
   `}
@@ -97,6 +97,7 @@ export const Button = styled.button`
 
   ${({ icon, gameMode }) => {
 
+    // normal game mode
     if (gameMode === "normal") {
       if (icon === 'paper') {
         return css`
@@ -116,7 +117,41 @@ export const Button = styled.button`
           bottom: 16px;
         `
       }
+    }
 
+    // bonus game mode
+    if (gameMode === 'bonus') {
+      if (icon === 'paper') {
+        return css`
+          right: 0;
+          top: 25%;
+        `
+      }
+      if (icon === 'scissors') {
+        return css`
+          right: 50%;
+          top: 5%;
+          transform: translateX(50%);
+        `
+      }
+      if (icon === 'rock') {
+        return css`
+          right: 10%;
+          bottom: 5%;
+        `
+      }
+      if (icon === 'spock') {
+        return css`
+          left: 0;
+          top: 25%;
+        `
+      }
+      if (icon === 'lizard') {
+        return css`
+          left: 10%;
+          bottom: 5%;
+        `
+      }
     }
   }}
 `
@@ -138,6 +173,11 @@ export const ButtonWhite = styled.div`
     height: 240px;
     width: 240px;
   `}
+
+  ${({ gameMode }) => gameMode === 'bonus' && css`
+    height: 108px;
+    width: 108px;
+  `}
 `
 
 export const ButtonImage = styled.div`
@@ -153,6 +193,11 @@ export const ButtonImage = styled.div`
   ${({ largerButton }) => largerButton && css`
     height: 120px;
     width: 120px;
+  `}
+
+  ${({ gameMode }) => gameMode === 'bonus' && css`
+    height: 60px;
+    width: 60px;
   `}
 `
 

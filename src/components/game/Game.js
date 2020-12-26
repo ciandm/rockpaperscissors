@@ -52,8 +52,11 @@ Game.Button = function GameButton({
       onClick={() => handleButtonClick(icon)}
       {...restProps}
     >
-      <ButtonWhite />
-      <ButtonImage icon={icon} />
+      <ButtonWhite gameMode={gameMode} />
+      <ButtonImage
+        gameMode={gameMode}
+        icon={icon}
+      />
     </Button>
   )
 }

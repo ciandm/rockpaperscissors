@@ -52,6 +52,40 @@ export function determineWinner(userChoice, houseChoice) {
       winner = 'user';
     }
   }
+  if (userChoice === 'lizard') {
+    if (houseChoice === 'rock') {
+      winner = 'house'
+    }
+    if (houseChoice === 'spock') {
+      winner = 'user';
+    }
+    if (houseChoice === 'scissors') {
+      winner = 'house';
+    }
+    if (houseChoice === 'paper') {
+      winner = 'user'
+    }
+    if (houseChoice === 'lizard') {
+      winner = 'draw';
+    }
+  }
+  if (userChoice === 'spock') {
+    if (houseChoice === 'rock') {
+      winner = 'user'
+    }
+    if (houseChoice === 'spock') {
+      winner = 'draw';
+    }
+    if (houseChoice === 'scissors') {
+      winner = 'user';
+    }
+    if (houseChoice === 'paper') {
+      winner = 'house'
+    }
+    if (houseChoice === 'lizard') {
+      winner = 'house';
+    }
+  }
   return winner
 }
 

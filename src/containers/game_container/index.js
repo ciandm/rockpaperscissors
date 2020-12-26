@@ -36,6 +36,8 @@ function GameContainer({
               icon={choice}
               gameMode={gameMode}
               handleButtonClick={() => handleUserChoiceSelection(choice)}
+              heightSize={gameMode === 'normal' ? '200px' : '150px'}
+              widthSize={gameMode === 'normal' ? '200px' : '150px'}
             />
           ))}
         </Game.Selection>
