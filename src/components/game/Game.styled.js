@@ -445,6 +445,7 @@ export const ColumnLarge = styled.div`
 
   @media screen and (max-width: 480px) {
     order: 1;
+    width: 100%;
   }
 `
 
@@ -505,6 +506,7 @@ export const ModalContents = styled.div`
   will-change: opacity, transform;
 
   @media screen and (max-width: 480px) {
+    border-radius: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
