@@ -258,32 +258,34 @@ export const ButtonImage = styled.div`
       return css`
         height: 120px;
         width: 120px;
+
+        @media screen and (max-width: 480px) {
+          height: 60px;
+          width: 60px;
+        }
+      `
+    }
+
+    if (gameMode === 'normal' && !largerButton) {
+      return css`
+         @media screen and (max-width: 480px) {
+          height: 60px;
+          width: 60px;
+        }
       `
     }
     if (gameMode === 'bonus' && !largerButton) {
       return css`
         height: 60px;
         width: 60px;
-      `
-    }
-  }}
 
-  @media screen and (max-width: 480px) {
-    ${({ gameMode }) => {
-    if (gameMode === 'normal') {
-      return css`
-          height: 60px;
-          width: 60px;
-        `
-    }
-    if (gameMode === 'bonus') {
-      return css`
-        height: 36px;
-        width: 36px;
+        @media screen and (max-width: 480px) {
+          height: 48px;
+          width: 48px;
+        }
       `
     }
   }}
-  }
 `
 
 export const Selected = styled.div`
@@ -294,7 +296,6 @@ export const Selected = styled.div`
 
   @media screen and (max-width: 480px) {
     flex-wrap: wrap;
-    justify-content: space-between;
   }
 `
 
@@ -323,6 +324,10 @@ export const Column = styled.div`
 
   @media screen and (max-width: 480px) {
     animation: none;
+
+    &:first-child {
+      margin-right: auto;
+    }
   }
 `
 
@@ -448,9 +453,14 @@ export const ColumnHeading = styled.h2`
   font-size: 56px;
   margin-top: 84px;
   text-transform: uppercase;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 48px;
+  }
 `
 
 export const ButtonReset = styled.button`
+  background-color: #FFF;
   border-radius: 8px;
   border: none;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
