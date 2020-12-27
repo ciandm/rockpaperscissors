@@ -58,6 +58,13 @@ export const Selection = styled.div`
   margin: 0 auto;
   position: relative;
   width: 100%;
+
+  @media screen and (max-width: 480px) {
+    background-size: 65%;
+    background-position: center 66px;
+    min-height: initial;
+    padding-top: 100%;
+  }
 `
 
 export const Button = styled.button`
@@ -95,32 +102,46 @@ export const Button = styled.button`
     animation-fill-mode: backwards;
   `}
 
-  ${({ icon, gameMode }) => {
+  ${({ icon, gameMode, largerButton }) => {
 
     // normal game mode
-    if (gameMode === "normal") {
+    if (gameMode === "normal" && !largerButton) {
       if (icon === 'paper') {
         return css`
           left: 16px;
           top: 16px;
+
+          @media screen and (max-width: 480px) {
+            left: 0;
+            top: 0;
+          }
         `
       }
       if (icon === 'scissors') {
         return css`
           right: 16px;
           top: 16px;
+
+          @media screen and (max-width: 480px) {
+            right: 0;
+            top: 0;
+          }
         `
       }
 
       if (icon === "rock") {
         return css`
           bottom: 16px;
+
+          @media screen and (max-width: 480px) {
+            top: 168px;
+          }
         `
       }
     }
 
     // bonus game mode
-    if (gameMode === 'bonus') {
+    if (gameMode === 'bonus' && !largerButton) {
       if (icon === 'paper') {
         return css`
           right: 0;
@@ -154,6 +175,25 @@ export const Button = styled.button`
       }
     }
   }}
+
+  @media screen and (max-width: 480px) {
+
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+
+    ${({ largerButton }) => {
+    if (largerButton) {
+      return css`
+        height: 132px;
+        width: 132px;
+      `
+    } else {
+      return css`
+        height: ${({ heightSize }) => heightSize === '200px' ? '132px' : '96px'};
+        width: ${({ widthSize }) => widthSize === '200px' ? '132px' : '96px'};
+        `
+    }
+  }}
+  }
 `
 
 export const ButtonWhite = styled.div`
@@ -172,12 +212,35 @@ export const ButtonWhite = styled.div`
     box-shadow: inset 0 12px 0px rgba(0, 0, 0, 0.1);
     height: 240px;
     width: 240px;
+
+    @media screen and (max-width: 480px) {
+      box-shadow: inset 0 6px 0px rgba(0, 0, 0, 0.1);
+      height: 108px;
+      width: 108px;
+    }
   `}
 
-  ${({ gameMode }) => gameMode === 'bonus' && css`
+  ${({ gameMode, largerButton }) => gameMode === 'bonus' && !largerButton && css`
     height: 108px;
     width: 108px;
   `}
+
+  @media screen and (max-width: 480px) {
+
+    box-shadow: inset 0 4px 0px rgba(0, 0, 0, 0.1);
+
+    ${({ largerButton, gameMode }) => {
+    if (gameMode === 'normal') return css`
+        height: 108px;
+        width: 108px;
+      `
+
+    if (gameMode === 'bonus' && !largerButton) return css`
+        height: 72px;
+        width: 72px;
+      `
+  }}
+  }
 `
 
 export const ButtonImage = styled.div`
@@ -190,15 +253,37 @@ export const ButtonImage = styled.div`
   width: 80px;
   z-index: 50;
 
-  ${({ largerButton }) => largerButton && css`
-    height: 120px;
-    width: 120px;
-  `}
+  ${({ largerButton, gameMode }) => {
+    if (largerButton) {
+      return css`
+        height: 120px;
+        width: 120px;
+      `
+    }
+    if (gameMode === 'bonus' && !largerButton) {
+      return css`
+        height: 60px;
+        width: 60px;
+      `
+    }
+  }}
 
-  ${({ gameMode }) => gameMode === 'bonus' && css`
-    height: 60px;
-    width: 60px;
-  `}
+  @media screen and (max-width: 480px) {
+    ${({ gameMode }) => {
+    if (gameMode === 'normal') {
+      return css`
+          height: 60px;
+          width: 60px;
+        `
+    }
+    if (gameMode === 'bonus') {
+      return css`
+        height: 36px;
+        width: 36px;
+      `
+    }
+  }}
+  }
 `
 
 export const Selected = styled.div`
@@ -206,6 +291,11 @@ export const Selected = styled.div`
   max-width: 940px;
   margin: 0 auto;
   width: 100%;
+
+  @media screen and (max-width: 480px) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 `
 
 export const Column = styled.div`
@@ -230,6 +320,10 @@ export const Column = styled.div`
   display: flex;
   flex-direction: column;
   will-change: transform;
+
+  @media screen and (max-width: 480px) {
+    animation: none;
+  }
 `
 
 export const ColumnHeader = styled.h3`
@@ -239,6 +333,13 @@ export const ColumnHeader = styled.h3`
   letter-spacing: 1.5px;
   margin-bottom: 60px;
   text-transform: uppercase;
+
+  @media screen and (max-width: 480px) {
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 36px;
+    order: 1;
+  }
 `
 
 export const ColumnChoice = styled.div`
@@ -257,6 +358,16 @@ export const ColumnChoice = styled.div`
     height: 240px;
     position: absolute;
     width: 240px;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 132px;
+    width: 132px;
+
+    &::before {
+      height: 108px;
+      width: 108px;
+    }
   }
 `
 
@@ -284,7 +395,7 @@ export const WinnerHighlight = styled.div`
   }
 
   &::before {
-      background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.02);
     height: 560px;
     width: 560px;
     z-index: -6;
@@ -295,6 +406,21 @@ export const WinnerHighlight = styled.div`
     height: 700px;
     width: 700px;
     z-index: -10;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 156px;
+    width: 156px;
+
+    &::before {
+      height: 228px;
+      width: 228px;
+    }
+
+    &::after {
+      height: 300px;
+      width: 300px;
+    }
   }
 `
 
@@ -311,11 +437,16 @@ export const ColumnLarge = styled.div`
   text-align: center;
   will-change: opacity, transform; 
   z-index: 600;
+
+  @media screen and (max-width: 480px) {
+    order: 1;
+  }
 `
 
 export const ColumnHeading = styled.h2`
   color: #FFF;
   font-size: 56px;
+  margin-top: 84px;
   text-transform: uppercase;
 `
 
@@ -362,6 +493,13 @@ export const ModalContents = styled.div`
   position: absolute;
   width: 400px;
   will-change: opacity, transform;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
 `
 
 export const ModalHeader = styled.header`
@@ -387,6 +525,10 @@ export const ModalHeader = styled.header`
     height: 24px;
     outline: none;
     width: 24px;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-top: auto;
   }
 `
 
@@ -417,6 +559,10 @@ export const ModalButton = styled.button`
   background-image: ${({ theme }) => theme.gradients.background};
   display: block;
   margin: 48px auto 0;
+
+  @media screen and (max-width: 480px) {
+    margin-top: auto;
+  }
 `
 
 export const ModalOpen = styled.button`
@@ -430,5 +576,11 @@ export const ModalOpen = styled.button`
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  @media screen and (max-width: 480px) {
+    margin: 0 0 36px 0;
+    right: 50%;
+    transform: translateX(50%);
   }
 `

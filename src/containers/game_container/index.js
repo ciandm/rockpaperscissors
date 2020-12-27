@@ -56,6 +56,7 @@ function GameContainer({
               choice={userChoice}
               largerButton="true"
               winner={winner === 'user' ? true : false}
+              gameMode={gameMode}
             />
           </Game.Column>
           <Game.ColumnLarge>
@@ -79,6 +80,7 @@ function GameContainer({
               largerButton="true"
               shouldFadeIn="true"
               winner={winner === 'house' ? true : false}
+              gameMode={gameMode}
             />
           </Game.Column>
         </Game.Selected>
